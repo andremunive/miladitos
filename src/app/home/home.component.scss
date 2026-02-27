@@ -1,0 +1,211 @@
+// Colores de la marca
+$brand-primary: #fc4c00;
+$brand-cream: #FAFAFA;
+
+.home {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../../assets/backgrounds/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (min-width: 768px) {
+    background-image: url('../../assets/backgrounds/bg-desktop.jpeg');
+  }
+}
+
+.home__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+.home__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+// Sección marca: logo, handle, ubicación, redes
+.home__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home__logo-wrap {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: $brand-cream;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.home__logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home__handle {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: $brand-cream;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.home__location {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(250, 250, 250, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.home__location-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.home__social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.home__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: $brand-cream;
+  transition: color 0.2s, transform 0.2s;
+
+  &:hover {
+    color: $brand-primary;
+    transform: scale(1.08);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// Cita
+.home__quote {
+  width: 100%;
+}
+
+.home__quote-text {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: rgba(250, 250, 250, 0.95);
+  color: #2c2c2c;
+  border-radius: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: normal;
+    color: #555;
+  }
+}
+
+// Botones (contenedor y botones centrados)
+.home__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.home__btn {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+  box-sizing: border-box;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.home__btn--primary {
+  background: $brand-primary;
+  color: $brand-cream;
+  border: none;
+
+  &:hover {
+    background: darken($brand-primary, 6%);
+    color: $brand-cream;
+  }
+}
+
+.home__btn--secondary {
+  background: rgba(250, 250, 250, 0.95);
+  color: #2c2c2c;
+  border: 2px solid $brand-cream;
+
+  &:hover {
+    background: $brand-cream;
+    color: $brand-primary;
+  }
+}
+
+.home__btn--whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(250, 250, 250, 0.95);
+  color: #2c2c2c;
+  border: 2px solid $brand-cream;
+
+  &:hover {
+    background: $brand-cream;
+    color: #25d366;
+  }
+}
+
+.home__btn-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}

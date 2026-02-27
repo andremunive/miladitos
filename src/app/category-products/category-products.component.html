@@ -1,0 +1,89 @@
+<div class="category">
+  <div class="category__overlay"></div>
+
+  <a routerLink="/menu" class="category__back" aria-label="Volver al menú">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
+
+  <a routerLink="/carrito" class="category__cart" aria-label="Carrito">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+    </svg>
+    <span
+      class="category__cart-badge"
+      [class.category__cart-badge--bump]="badgeBump"
+      *ngIf="(cartCount$ | async) as count"
+    >{{ count }}</span>
+  </a>
+
+  <div class="category__content">
+    <header class="category__header">
+      <div class="category__brand">
+        <div class="category__logo-wrap">
+          <img src="assets/logo/logo.jpg" alt="Miladitos" class="category__logo" />
+        </div>
+        <p class="category__handle">@miladitos</p>
+        <p class="category__location">
+          <svg class="category__location-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Valledupar
+        </p>
+      </div>
+      <h1 class="category__title">{{ categoryName }}</h1>
+    </header>
+
+    <ng-container *ngFor="let sub of subcategories">
+      <button
+        type="button"
+        class="category__dropdown"
+        (click)="toggleSubcategory(sub.id)"
+        [attr.aria-expanded]="isExpanded(sub.id)"
+        [attr.aria-label]="sub.title + ': ' + (isExpanded(sub.id) ? 'Contraer' : 'Expandir')"
+      >
+        <span class="category__dropdown-title">{{ sub.title }}</span>
+        <span class="category__dropdown-arrow" [class.category__dropdown-arrow--expanded]="isExpanded(sub.id)">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+          </svg>
+        </span>
+      </button>
+
+      <section *ngIf="isExpanded(sub.id)" class="category__list" [@subcategoryExpand]>
+        <article *ngFor="let product of getProductsBySubcategory(sub.id)" class="category__card">
+          <div class="category__card-top">
+            <div class="category__card-image-wrap">
+              <img [src]="product.image" [alt]="product.name" class="category__card-image" />
+            </div>
+            <div class="category__card-info">
+              <h2 class="category__card-title">{{ product.name }}</h2>
+              <p class="category__card-description">{{ product.description }}</p>
+              <p class="category__card-price">{{ getDisplayPrice(product) }}</p>
+            </div>
+          </div>
+          <div class="category__card-actions">
+            <div class="category__quantity">
+              <button
+                type="button"
+                class="category__qty-btn"
+                aria-label="Menos"
+                [disabled]="getQuantity(product.id) === 1"
+                (click)="subtractOne(product.id)"
+              >−</button>
+              <span class="category__qty-value">{{ getQuantity(product.id) }}</span>
+              <button
+                type="button"
+                class="category__qty-btn"
+                aria-label="Más"
+                (click)="addOne(product.id)"
+              >+</button>
+            </div>
+            <button type="button" class="category__add-btn" (click)="addToCart(product)">Agregar</button>
+          </div>
+        </article>
+      </section>
+    </ng-container>
+  </div>
+</div>

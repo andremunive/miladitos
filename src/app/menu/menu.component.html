@@ -1,0 +1,42 @@
+<div class="menu">
+  <div class="menu__overlay"></div>
+
+  <a routerLink="/" class="menu__back" aria-label="Volver al inicio">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
+
+  <div class="menu__content">
+    <header class="menu__header">
+      <div class="menu__brand">
+        <div class="menu__logo-wrap">
+          <img src="assets/logo/logo.jpg" alt="Miladitos" class="menu__logo" />
+        </div>
+        <p class="menu__handle">@miladitos</p>
+        <p class="menu__location">
+          <svg class="menu__location-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Valledupar
+        </p>
+      </div>
+    </header>
+
+    <section class="menu__categories">
+      <a
+        *ngFor="let category of categories"
+        [routerLink]="['/', category.id]"
+        class="menu__card menu__card--link"
+      >
+        <div class="menu__card-image-wrap">
+          <img [src]="category.image" [alt]="category.title" class="menu__card-image" />
+        </div>
+        <div class="menu__card-body">
+          <h2 class="menu__card-title">{{ category.title }}</h2>
+          <p class="menu__card-description">{{ category.description }}</p>
+        </div>
+      </a>
+    </section>
+  </div>
+</div>

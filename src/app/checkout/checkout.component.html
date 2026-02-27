@@ -1,0 +1,99 @@
+<div class="checkout">
+  <div class="checkout__overlay"></div>
+
+  <a routerLink="/carrito" class="checkout__back" aria-label="Volver al carrito">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    </svg>
+  </a>
+
+  <div class="checkout__content">
+    <header class="checkout__header">
+      <div class="checkout__brand">
+        <div class="checkout__logo-wrap">
+          <img src="assets/logo/logo.jpg" alt="Miladitos" class="checkout__logo" />
+        </div>
+        <p class="checkout__handle">@miladitos</p>
+        <p class="checkout__location">
+          <svg class="checkout__location-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Valledupar
+        </p>
+      </div>
+      <h1 class="checkout__title">Información de envío</h1>
+    </header>
+
+    <form class="checkout__form" #checkoutForm="ngForm">
+      <div class="checkout__field">
+        <label class="checkout__label" for="nombre">Nombre</label>
+        <input
+          id="nombre"
+          type="text"
+          name="nombre"
+          class="checkout__input"
+          placeholder="Tu nombre"
+          [(ngModel)]="formData.nombre"
+          required
+        />
+      </div>
+      <div class="checkout__field">
+        <label class="checkout__label" for="direccion">Dirección</label>
+        <input
+          id="direccion"
+          type="text"
+          name="direccion"
+          class="checkout__input"
+          placeholder="Dirección de envío"
+          [(ngModel)]="formData.direccion"
+          required
+        />
+      </div>
+      <div class="checkout__field">
+        <label class="checkout__label" for="celular">Celular</label>
+        <input
+          id="celular"
+          type="tel"
+          name="celular"
+          class="checkout__input"
+          placeholder="Número de celular"
+          [(ngModel)]="formData.celular"
+          required
+        />
+      </div>
+      <div class="checkout__field">
+        <label class="checkout__label" for="metodoPago">Método de pago</label>
+        <select
+          id="metodoPago"
+          name="metodoPago"
+          class="checkout__select"
+          [(ngModel)]="formData.metodoPago"
+          required
+        >
+          <option value="efectivo">Efectivo</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+      </div>
+
+      <p class="checkout__note">
+        El valor de domicilio es adicional y depende de la dirección hacia donde se enviará el pedido.
+      </p>
+    </form>
+  </div>
+
+  <footer class="checkout__footer">
+    <span class="checkout__total" *ngIf="totalAmount$ | async as total">
+      Total {{ formatPrice(total) }}
+    </span>
+    <ng-container *ngIf="cartCount$ | async as count">
+      <button
+        *ngIf="count > 0"
+        type="button"
+        class="checkout__confirm"
+        [disabled]="checkoutForm.invalid"
+        (click)="confirmOrder()"
+      >Confirmar</button>
+      <span *ngIf="count === 0" class="checkout__confirm checkout__confirm--disabled">Confirmar</span>
+    </ng-container>
+  </footer>
+</div>
