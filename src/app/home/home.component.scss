@@ -1,6 +1,6 @@
 // Colores de la marca
 $brand-primary: #fc4c00;
-$brand-cream: #FAFAFA;
+$brand-cream: #fafafa;
 
 .home {
   position: relative;
@@ -9,13 +9,13 @@ $brand-cream: #FAFAFA;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../assets/backgrounds/bg.png');
+  background-image: url("../../assets/backgrounds/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
   @media (min-width: 768px) {
-    background-image: url('../../assets/backgrounds/bg-desktop.jpeg');
+    background-image: url("../../assets/backgrounds/bg-desktop.jpg");
   }
 }
 
@@ -102,7 +102,9 @@ $brand-cream: #FAFAFA;
   width: 44px;
   height: 44px;
   color: $brand-cream;
-  transition: color 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    transform 0.2s;
 
   &:hover {
     color: $brand-primary;
@@ -159,7 +161,10 @@ $brand-cream: #FAFAFA;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.15s;
   box-sizing: border-box;
 
   &:active {

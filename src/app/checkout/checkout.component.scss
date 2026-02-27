@@ -1,5 +1,5 @@
 $brand-primary: #fc4c00;
-$brand-cream: #FAFAFA;
+$brand-cream: #fafafa;
 
 .checkout {
   position: relative;
@@ -11,18 +11,18 @@ $brand-cream: #FAFAFA;
   padding-bottom: 80px;
 
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
-    background-image: url('../../assets/backgrounds/bg.png');
+    background-image: url("../../assets/backgrounds/bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
 
     @media (min-width: 768px) {
-      background-image: url('../../assets/backgrounds/bg-desktop.jpeg');
+      background-image: url("../../assets/backgrounds/bg-desktop.jpg");
     }
   }
 }
@@ -49,7 +49,10 @@ $brand-cream: #FAFAFA;
   border-radius: 50%;
   background: rgba(250, 250, 250, 0.25);
   border: 1px solid rgba(250, 250, 250, 0.5);
-  transition: color 0.2s, background 0.2s, transform 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    transform 0.2s;
   text-decoration: none;
 
   &:hover {
@@ -169,7 +172,9 @@ $brand-cream: #FAFAFA;
   font-size: 1rem;
   color: #2c2c2c;
   box-sizing: border-box;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
 
   &::placeholder {
     color: #888;
