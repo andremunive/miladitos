@@ -95,10 +95,21 @@
         *ngIf="count > 0"
         type="button"
         class="checkout__confirm"
-        [disabled]="checkoutForm.invalid"
+        [disabled]="checkoutForm.invalid || isSending"
         (click)="confirmOrder()"
-      >Confirmar</button>
-      <span *ngIf="count === 0" class="checkout__confirm checkout__confirm--disabled">Confirmar</span>
+      >
+        <ng-container *ngIf="!isSending; else sendingTemplate">
+          Confirmar
+        </ng-container>
+      </button>
+      <ng-template #sendingTemplate>
+        Enviando pedido...
+      </ng-template>
+      <span
+        *ngIf="count === 0"
+        class="checkout__confirm checkout__confirm--disabled"
+        >Confirmar</span
+      >
     </ng-container>
   </footer>
 </div>

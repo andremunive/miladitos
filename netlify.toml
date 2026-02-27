@@ -5,6 +5,9 @@
   command = "npm run build"
   publish = "dist/miladitos"
 
+[functions]
+  directory = "netlify/functions"
+
 # Las redirecciones SPA se gestionan con el archivo _redirects
 # (copiado a dist/miladitos vía angular.json assets).
 # Si prefieres definirlas aquí, descomenta el bloque siguiente:

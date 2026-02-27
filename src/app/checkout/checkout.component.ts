@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import {
   selectCartItems,
   selectCartTotalAmount,
@@ -28,23 +29,76 @@ export class CheckoutComponent {
     metodoPago: 'efectivo' as 'efectivo' | 'transferencia',
   };
 
+  isSending = false;
+
   formatPrice = formatPrice;
 
-  constructor(private store: Store, private location: Location) {
+  constructor(
+    private store: Store,
+    private location: Location,
+    private http: HttpClient,
+  ) {
     this.totalAmount$ = this.store.select(selectCartTotalAmount);
     this.cartCount$ = this.store.select(selectCartTotalCount);
   }
 
   confirmOrder(): void {
+    if (this.isSending) {
+      return;
+    }
+
     this.store
       .select(selectCartItems)
       .pipe(take(1))
       .subscribe((items) => {
         const message = this.buildWhatsAppMessage(items);
-        const url = `https://wa.me/573245709801?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
-        this.store.dispatch(clearCart());
+        const subject = this.buildEmailSubject();
+        const html = message.replace(/\n/g, '<br />');
+
+        this.isSending = true;
+
+        this.http
+          .post('/.netlify/functions/send-order-email', {
+            subject,
+            html,
+          })
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.openWhatsApp(message);
+              this.store.dispatch(clearCart());
+            },
+            error: (error) => {
+              console.error('Error al enviar el correo de pedido', error);
+              // Aún así permitimos que el usuario continúe con el pedido por WhatsApp
+              this.openWhatsApp(message);
+            },
+            complete: () => {
+              this.isSending = false;
+            },
+          });
       });
+  }
+
+  private buildEmailSubject(): string {
+    const now = new Date();
+
+    const pad = (value: number) => value.toString().padStart(2, '0');
+
+    const day = pad(now.getDate());
+    const month = pad(now.getMonth() + 1);
+    const year = now.getFullYear().toString();
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+
+    const code = `${day}${month}${year}${hours}${minutes}`;
+
+    return `Orden Miladitos #${code}`;
+  }
+
+  private openWhatsApp(message: string): void {
+    const url = `https://wa.me/573245709801?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   }
 
   private buildWhatsAppMessage(items: CartItem[]): string {
