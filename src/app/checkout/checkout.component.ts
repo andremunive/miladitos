@@ -58,7 +58,7 @@ export class CheckoutComponent {
         this.isSending = true;
 
         this.http
-          .post('/.netlify/functions/send-order-email', {
+          .post('https://miladitos.netlify.app/.netlify/functions/send-order-email', {
             subject,
             html,
           })

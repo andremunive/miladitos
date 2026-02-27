@@ -1,10 +1,25 @@
 // Netlify Function para enviar el correo de pedido con Resend
 // Endpoint: /.netlify/functions/send-order-email
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
 exports.handler = async (event) => {
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 204,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Method Not Allowed' }),
     };
   }
@@ -14,7 +29,10 @@ exports.handler = async (event) => {
     if (!apiKey) {
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Falta RESEND_API_KEY en las variables de entorno' }),
+        headers: corsHeaders,
+        body: JSON.stringify({
+          error: 'Falta RESEND_API_KEY en las variables de entorno',
+        }),
       };
     }
 
@@ -25,6 +43,7 @@ exports.handler = async (event) => {
     if (!subject || !html) {
       return {
         statusCode: 400,
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'subject y html son requeridos' }),
       };
     }
@@ -48,6 +67,7 @@ exports.handler = async (event) => {
       console.error('Error al enviar correo con Resend:', response.status, errorText);
       return {
         statusCode: 500,
+        headers: corsHeaders,
         body: JSON.stringify({ error: 'Error al enviar el correo' }),
       };
     }
@@ -56,12 +76,14 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: corsHeaders,
       body: JSON.stringify({ success: true, data }),
     };
   } catch (error) {
     console.error('Excepción en send-order-email:', error);
     return {
       statusCode: 500,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Error interno en la función de correo' }),
     };
   }
