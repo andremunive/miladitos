@@ -65,10 +65,20 @@ exports.handler = async (event) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Error al enviar correo con Resend:', response.status, errorText);
+      let errorDetail = 'Error al enviar el correo';
+      try {
+        const errJson = JSON.parse(errorText);
+        if (errJson && errJson.message) errorDetail = errJson.message;
+      } catch (_) {
+        if (errorText) errorDetail = errorText;
+      }
       return {
         statusCode: 500,
         headers: corsHeaders,
-        body: JSON.stringify({ error: 'Error al enviar el correo' }),
+        body: JSON.stringify({
+          error: errorDetail,
+          resendStatus: response.status,
+        }),
       };
     }
 
