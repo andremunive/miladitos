@@ -1,0 +1,15 @@
+# Configuración de despliegue en Netlify para Angular
+# https://docs.netlify.com/frameworks/angular/
+
+[build]
+  command = "npm run build"
+  publish = "dist/miladitos"
+
+# Las redirecciones SPA se gestionan con el archivo _redirects
+# (copiado a dist/miladitos vía angular.json assets).
+# Si prefieres definirlas aquí, descomenta el bloque siguiente:
+#
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
