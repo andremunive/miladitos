@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Observable } from 'rxjs';
 import { PRODUCTS, CATEGORY_NAMES, SUBCATEGORIES_BY_CATEGORY, Product, Subcategory } from '../data/products.data';
 import { addToCart } from '../store/cart/cart.actions';
-import { selectCartTotalCount } from '../store/cart/cart.selectors';
+import { CartFabService } from '../services/cart-fab.service';
 
 @Component({
   selector: 'app-category-products',
@@ -31,14 +30,12 @@ export class CategoryProductsComponent {
   products: Product[] = [];
   expandedSubcategories: Record<string, boolean> = {};
   productQuantities: Record<string, number> = {};
-  cartCount$: Observable<number>;
-  badgeBump = false;
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private cartFab: CartFabService
   ) {
-    this.cartCount$ = this.store.select(selectCartTotalCount);
     const path = this.route.snapshot.routeConfig?.path || '';
     this.categoryId = path;
     this.categoryName = CATEGORY_NAMES[path] || path;
@@ -105,7 +102,6 @@ export class CategoryProductsComponent {
         quantity
       }
     }));
-    this.badgeBump = true;
-    setTimeout(() => this.badgeBump = false, 400);
+    this.cartFab.triggerBump();
   }
 }

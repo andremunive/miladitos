@@ -34,10 +34,8 @@ $brand-cream: #fafafa;
   pointer-events: none;
 }
 
-.category__back,
-.category__cart {
-  position: absolute;
-  z-index: 2;
+.category__back {
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,50 +62,12 @@ $brand-cream: #fafafa;
 }
 
 .category__back {
+  position: absolute;
   top: 1rem;
   left: 1rem;
 
   &:hover {
     transform: translateX(-2px);
-  }
-}
-
-.category__cart {
-  top: 1rem;
-  right: 1rem;
-}
-
-.category__cart-badge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: $brand-primary;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  line-height: 1;
-
-  &--bump {
-    animation: category-badge-bump 0.4s ease-out;
-  }
-}
-
-@keyframes category-badge-bump {
-  0% {
-    transform: scale(1);
-  }
-  40% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
   }
 }
 

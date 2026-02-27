@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartItem } from '../store/cart/cart.reducer';
@@ -15,7 +16,7 @@ export class CartComponent {
   totalAmount$: Observable<number>;
   cartCount$: Observable<number>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private location: Location) {
     this.items$ = this.store.select(selectCartItems);
     this.totalAmount$ = this.store.select(selectCartTotalAmount);
     this.cartCount$ = this.store.select(selectCartTotalCount);
@@ -49,5 +50,9 @@ export class CartComponent {
     const unit = (item.price || '').replace(/\$/g, '').replace(/\./g, '').trim();
     const value = parseInt(unit, 10) || 0;
     return value * item.quantity;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

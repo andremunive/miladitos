@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -29,7 +30,7 @@ export class CheckoutComponent {
 
   formatPrice = formatPrice;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private location: Location) {
     this.totalAmount$ = this.store.select(selectCartTotalAmount);
     this.cartCount$ = this.store.select(selectCartTotalCount);
   }
@@ -87,5 +88,9 @@ export class CheckoutComponent {
       .trim();
     const value = parseInt(cleaned, 10) || 0;
     return value * item.quantity;
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
