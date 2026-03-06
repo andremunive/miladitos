@@ -98,7 +98,7 @@ export class CheckoutComponent {
 
   private openWhatsApp(message: string): void {
     const url = `https://wa.me/573245709801?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
+    window.location.href = url;
   }
 
   private buildWhatsAppMessage(items: CartItem[]): string {
