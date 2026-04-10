@@ -27,7 +27,7 @@
       <a
         *ngFor="let category of categories"
         [routerLink]="['/', category.id]"
-        class="menu__card menu__card--link"
+        class="menu__card"
       >
         <div class="menu__card-image-wrap">
           <img [src]="category.image" [alt]="category.title" class="menu__card-image" />
@@ -36,6 +36,9 @@
           <h2 class="menu__card-title">{{ category.title }}</h2>
           <p class="menu__card-description">{{ category.description }}</p>
         </div>
+        <svg class="menu__card-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+        </svg>
       </a>
     </section>
   </div>

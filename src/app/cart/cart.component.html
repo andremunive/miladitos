@@ -14,23 +14,25 @@
 
   <div class="cart__content">
     <header class="cart__header">
-      <div class="cart__brand">
-        <div class="cart__logo-wrap">
-          <img src="assets/logo/logo.jpg" alt="Miladitos" class="cart__logo" />
-        </div>
-        <p class="cart__handle">@miladitos</p>
-        <p class="cart__location">
-          <svg class="cart__location-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          Valledupar
-        </p>
+      <div class="cart__logo-wrap">
+        <img src="assets/logo/logo.jpg" alt="Miladitos" class="cart__logo" />
       </div>
       <h1 class="cart__title">Tu pedido</h1>
     </header>
 
     <section class="cart__list" *ngIf="items$ | async as items">
       <article *ngFor="let item of items" class="cart__card">
+        <button
+          type="button"
+          class="cart__remove-btn"
+          aria-label="Eliminar producto"
+          (click)="removeItem(item)"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+
         <div class="cart__card-top">
           <div class="cart__card-image-wrap">
             <img [src]="item.image" [alt]="item.name" class="cart__card-image" />
@@ -38,16 +40,16 @@
           <div class="cart__card-info">
             <h2 class="cart__card-title">{{ item.name }}</h2>
             <p class="cart__card-description">{{ item.description }}</p>
-            <p class="cart__card-price">{{ formatPrice(getLineTotal(item)) }}</p>
+            <p class="cart__card-unit-price">{{ item.price }} c/u</p>
           </div>
         </div>
-        <div class="cart__card-actions">
+
+        <div class="cart__card-bottom">
           <div class="cart__quantity">
             <button
               type="button"
               class="cart__qty-btn"
               aria-label="Menos"
-              [disabled]="item.quantity === 1"
               (click)="subtractOne(item)"
             >−</button>
             <span class="cart__qty-value">{{ item.quantity }}</span>
@@ -58,21 +60,17 @@
               (click)="addOne(item)"
             >+</button>
           </div>
-          <button
-            type="button"
-            class="cart__remove-btn"
-            aria-label="Eliminar producto"
-            (click)="removeItem(item)"
-          >
-            <svg class="cart__remove-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
-            </svg>
-            Eliminar
-          </button>
+          <p class="cart__card-price">{{ formatPrice(getLineTotal(item)) }}</p>
         </div>
       </article>
 
-      <p *ngIf="items.length === 0" class="cart__empty">No hay productos en tu pedido.</p>
+      <div *ngIf="items.length === 0" class="cart__empty">
+        <svg class="cart__empty-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+        </svg>
+        <p class="cart__empty-text">Tu carrito está vacío</p>
+        <a routerLink="/menu" class="cart__empty-link">Ver menú</a>
+      </div>
     </section>
   </div>
 
@@ -81,7 +79,12 @@
       Total {{ formatPrice(total) }}
     </span>
     <ng-container *ngIf="cartCount$ | async as count">
-      <a *ngIf="count > 0" routerLink="/checkout" class="cart__continue">Continuar</a>
+      <a *ngIf="count > 0" routerLink="/checkout" class="cart__continue">
+        Continuar
+        <svg class="cart__continue-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
       <span *ngIf="count === 0" class="cart__continue cart__continue--disabled">Continuar</span>
     </ng-container>
   </footer>

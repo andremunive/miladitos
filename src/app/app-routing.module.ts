@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: 'menu', component: MenuComponent },
   { path: 'carrito', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'fritos', component: CategoryProductsComponent },
-  { path: 'congelados', component: CategoryProductsComponent },
+  { path: 'deditos', component: CategoryProductsComponent },
+  { path: 'empanaditas', component: CategoryProductsComponent },
   { path: 'combos', component: CategoryProductsComponent }
 ];
 

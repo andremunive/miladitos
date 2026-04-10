@@ -32,7 +32,10 @@
         [attr.aria-expanded]="isExpanded(sub.id)"
         [attr.aria-label]="sub.title + ': ' + (isExpanded(sub.id) ? 'Contraer' : 'Expandir')"
       >
-        <span class="category__dropdown-title">{{ sub.title }}</span>
+        <div class="category__dropdown-info">
+          <span class="category__dropdown-title">{{ sub.title }}</span>
+          <span class="category__dropdown-subtitle">{{ sub.subtitle }}</span>
+        </div>
         <span class="category__dropdown-arrow" [class.category__dropdown-arrow--expanded]="isExpanded(sub.id)">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
@@ -49,6 +52,23 @@
             <div class="category__card-info">
               <h2 class="category__card-title">{{ product.name }}</h2>
               <p class="category__card-description">{{ product.description }}</p>
+
+              <div *ngIf="product.sizes" class="category__size-toggle">
+                <button
+                  *ngFor="let size of product.sizes"
+                  type="button"
+                  class="category__size-btn"
+                  [class.category__size-btn--active]="getSelectedSizeId(product.id) === size.id"
+                  (click)="selectSize(product.id, size.id)"
+                >
+                  {{ size.label }}
+                </button>
+              </div>
+
+              <p *ngIf="product.sizes" class="category__size-detail">
+                {{ getSelectedSizeDetail(product) }}
+              </p>
+
               <p class="category__card-price">{{ getDisplayPrice(product) }}</p>
             </div>
           </div>

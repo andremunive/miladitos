@@ -14,19 +14,10 @@
 
   <div class="checkout__content">
     <header class="checkout__header">
-      <div class="checkout__brand">
-        <div class="checkout__logo-wrap">
-          <img src="assets/logo/logo.jpg" alt="Miladitos" class="checkout__logo" />
-        </div>
-        <p class="checkout__handle">@miladitos</p>
-        <p class="checkout__location">
-          <svg class="checkout__location-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          Valledupar
-        </p>
+      <div class="checkout__logo-wrap">
+        <img src="assets/logo/logo.jpg" alt="Miladitos" class="checkout__logo" />
       </div>
-      <h1 class="checkout__title">Información de envío</h1>
+      <h1 class="checkout__title">¿A dónde te lo enviamos?</h1>
     </header>
 
     <form class="checkout__form" #checkoutForm="ngForm">
@@ -37,11 +28,13 @@
           type="text"
           name="nombre"
           class="checkout__input"
-          placeholder="Tu nombre"
+          placeholder="¿Quién recibe el pedido?"
+          autocomplete="name"
           [(ngModel)]="formData.nombre"
           required
         />
       </div>
+
       <div class="checkout__field">
         <label class="checkout__label" for="direccion">Dirección</label>
         <input
@@ -49,11 +42,13 @@
           type="text"
           name="direccion"
           class="checkout__input"
-          placeholder="Dirección de envío"
+          placeholder="Barrio, calle, número de casa"
+          autocomplete="street-address"
           [(ngModel)]="formData.direccion"
           required
         />
       </div>
+
       <div class="checkout__field">
         <label class="checkout__label" for="celular">Celular</label>
         <input
@@ -61,28 +56,49 @@
           type="tel"
           name="celular"
           class="checkout__input"
-          placeholder="Número de celular"
+          placeholder="300 000 0000"
+          autocomplete="tel"
           [(ngModel)]="formData.celular"
           required
         />
       </div>
+
       <div class="checkout__field">
-        <label class="checkout__label" for="metodoPago">Método de pago</label>
-        <select
-          id="metodoPago"
-          name="metodoPago"
-          class="checkout__select"
-          [(ngModel)]="formData.metodoPago"
-          required
-        >
-          <option value="efectivo">Efectivo</option>
-          <option value="transferencia">Transferencia</option>
-        </select>
+        <label class="checkout__label">Método de pago</label>
+        <div class="checkout__payment-toggle">
+          <button
+            type="button"
+            class="checkout__payment-btn"
+            [class.checkout__payment-btn--active]="formData.metodoPago === 'efectivo'"
+            (click)="formData.metodoPago = 'efectivo'"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+            </svg>
+            Efectivo
+          </button>
+          <button
+            type="button"
+            class="checkout__payment-btn"
+            [class.checkout__payment-btn--active]="formData.metodoPago === 'transferencia'"
+            (click)="formData.metodoPago = 'transferencia'"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+            </svg>
+            Transferencia
+          </button>
+        </div>
       </div>
 
-      <p class="checkout__note">
-        El valor de domicilio es adicional y depende de la dirección hacia donde se enviará el pedido.
-      </p>
+      <div class="checkout__note">
+        <svg class="checkout__note-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <p class="checkout__note-text">
+          El valor del domicilio depende de la dirección de envío.
+        </p>
+      </div>
     </form>
   </div>
 
@@ -99,17 +115,16 @@
         (click)="confirmOrder()"
       >
         <ng-container *ngIf="!isSending; else sendingTemplate">
-          Confirmar
+          Confirmar pedido
         </ng-container>
       </button>
       <ng-template #sendingTemplate>
-        Enviando pedido...
+        Enviando...
       </ng-template>
       <span
         *ngIf="count === 0"
         class="checkout__confirm checkout__confirm--disabled"
-        >Confirmar</span
-      >
+      >Confirmar pedido</span>
     </ng-container>
   </footer>
 </div>

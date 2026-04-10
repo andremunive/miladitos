@@ -8,21 +8,21 @@ import { Component } from '@angular/core';
 export class MenuComponent {
   categories = [
     {
-      id: 'fritos',
-      title: 'Fritos',
-      description: 'Para ahorrarte la fritada, listos para consumir',
-      image: 'assets/products/fritos.jpeg',
+      id: 'deditos',
+      title: 'Deditos',
+      description: 'Queso, bocadillo, mixtos y combinados',
+      image: 'assets/products/dqueso.jpg',
     },
     {
-      id: 'congelados',
-      title: 'Congelados',
-      description: 'Si quieres guardar para preparar más tarde',
-      image: 'assets/products/congelados.PNG',
+      id: 'empanaditas',
+      title: 'Empanaditas',
+      description: 'Pollo, hawaianas y rancheras',
+      image: 'assets/products/epollo.jpg',
     },
     {
       id: 'combos',
       title: 'Combos',
-      description: 'Ideales para eventos y reuniones',
+      description: 'Paquetes ideales para eventos y reuniones',
       image: 'assets/products/combos.jpeg',
     },
   ];
