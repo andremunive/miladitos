@@ -88,46 +88,6 @@ const EMPANADITAS_CONGELADOS_SIZES: ProductSize[] = [
 
 export const PRODUCTS: Product[] = [
   // ══════════════════════════════════════
-  // DEDITOS — Fritos
-  // ══════════════════════════════════════
-  {
-    id: 'deditos-queso-fritos',
-    categoryId: 'deditos',
-    subcategoryId: 'fritos',
-    name: 'Deditos de queso',
-    description: 'Rellenos de queso',
-    image: 'assets/products/dqueso.jpg',
-    sizes: DEDITOS_FRITOS_SIZES,
-  },
-  {
-    id: 'deditos-bocadillo-fritos',
-    categoryId: 'deditos',
-    subcategoryId: 'fritos',
-    name: 'Deditos de bocadillo',
-    description: 'Rellenos de dulce bocadillo',
-    image: 'assets/products/dbocadillo.jpg',
-    sizes: DEDITOS_FRITOS_SIZES,
-  },
-  {
-    id: 'deditos-mixtos-fritos',
-    categoryId: 'deditos',
-    subcategoryId: 'fritos',
-    name: 'Deditos mixtos',
-    description: '12 de queso y 12 de bocadillo',
-    image: 'assets/products/dmixtos.jpg',
-    sizes: DEDITOS_FRITOS_SIZES,
-  },
-  {
-    id: 'deditos-combinados-fritos',
-    categoryId: 'deditos',
-    subcategoryId: 'fritos',
-    name: 'Deditos combinados',
-    description: 'Rellenos de queso y bocadillo',
-    image: 'assets/products/dcombinados.jpg',
-    sizes: DEDITOS_FRITOS_SIZES,
-  },
-
-  // ══════════════════════════════════════
   // DEDITOS — Congelados
   // ══════════════════════════════════════
   {
@@ -168,34 +128,43 @@ export const PRODUCTS: Product[] = [
   },
 
   // ══════════════════════════════════════
-  // EMPANADITAS — Fritos
+  // DEDITOS — Fritos
   // ══════════════════════════════════════
   {
-    id: 'empanaditas-pollo-fritos',
-    categoryId: 'empanaditas',
+    id: 'deditos-queso-fritos',
+    categoryId: 'deditos',
     subcategoryId: 'fritos',
-    name: 'Empanaditas de pollo',
-    description: 'Rellenas de pollo sazonado',
-    image: 'assets/products/epollo.jpg',
-    sizes: EMPANADITAS_FRITOS_SIZES,
+    name: 'Deditos de queso',
+    description: 'Rellenos de queso',
+    image: 'assets/products/dqueso.jpg',
+    sizes: DEDITOS_FRITOS_SIZES,
   },
   {
-    id: 'empanaditas-hawaianas-fritos',
-    categoryId: 'empanaditas',
+    id: 'deditos-bocadillo-fritos',
+    categoryId: 'deditos',
     subcategoryId: 'fritos',
-    name: 'Empanaditas hawaianas',
-    description: 'Con pollo, piña y queso',
-    image: 'assets/products/ehawaiana.jpg',
-    sizes: EMPANADITAS_FRITOS_SIZES,
+    name: 'Deditos de bocadillo',
+    description: 'Rellenos de dulce bocadillo',
+    image: 'assets/products/dbocadillo.jpg',
+    sizes: DEDITOS_FRITOS_SIZES,
   },
   {
-    id: 'empanaditas-rancheras-fritos',
-    categoryId: 'empanaditas',
+    id: 'deditos-mixtos-fritos',
+    categoryId: 'deditos',
     subcategoryId: 'fritos',
-    name: 'Empanaditas rancheras',
-    description: 'Con queso y salchicha ranchera',
-    image: 'assets/products/eranchera.jpg',
-    sizes: EMPANADITAS_FRITOS_SIZES,
+    name: 'Deditos mixtos',
+    description: '12 de queso y 12 de bocadillo',
+    image: 'assets/products/dmixtos.jpg',
+    sizes: DEDITOS_FRITOS_SIZES,
+  },
+  {
+    id: 'deditos-combinados-fritos',
+    categoryId: 'deditos',
+    subcategoryId: 'fritos',
+    name: 'Deditos combinados',
+    description: 'Rellenos de queso y bocadillo',
+    image: 'assets/products/dcombinados.jpg',
+    sizes: DEDITOS_FRITOS_SIZES,
   },
 
   // ══════════════════════════════════════
@@ -230,43 +199,34 @@ export const PRODUCTS: Product[] = [
   },
 
   // ══════════════════════════════════════
-  // COMBOS — Fritos
+  // EMPANADITAS — Fritos
   // ══════════════════════════════════════
   {
-    id: 'combo-fritos-60',
-    categoryId: 'combos',
+    id: 'empanaditas-pollo-fritos',
+    categoryId: 'empanaditas',
     subcategoryId: 'fritos',
-    name: 'Combo de 60',
-    description: '30 deditos fritos variados y 30 empanaditas fritas variadas',
-    image: 'assets/products/cfrito.jpg',
-    price: '$58.000',
+    name: 'Empanaditas de pollo',
+    description: 'Rellenas de pollo sazonado',
+    image: 'assets/products/epollo.jpg',
+    sizes: EMPANADITAS_FRITOS_SIZES,
   },
   {
-    id: 'combo-fritos-90',
-    categoryId: 'combos',
+    id: 'empanaditas-hawaianas-fritos',
+    categoryId: 'empanaditas',
     subcategoryId: 'fritos',
-    name: 'Combo de 90',
-    description: '45 deditos fritos variados y 45 empanaditas fritas variadas',
-    image: 'assets/products/cfrito.jpg',
-    price: '$87.000',
+    name: 'Empanaditas hawaianas',
+    description: 'Con pollo, piña y queso',
+    image: 'assets/products/ehawaiana.jpg',
+    sizes: EMPANADITAS_FRITOS_SIZES,
   },
   {
-    id: 'combo-fritos-120',
-    categoryId: 'combos',
+    id: 'empanaditas-rancheras-fritos',
+    categoryId: 'empanaditas',
     subcategoryId: 'fritos',
-    name: 'Combo de 120',
-    description: '60 deditos fritos variados y 60 empanaditas fritas variadas',
-    image: 'assets/products/cfrito.jpg',
-    price: '$112.000',
-  },
-  {
-    id: 'combo-fritos-150',
-    categoryId: 'combos',
-    subcategoryId: 'fritos',
-    name: 'Combo de 150',
-    description: '75 deditos fritos variados y 75 empanaditas fritas variadas',
-    image: 'assets/products/cfrito.jpg',
-    price: '$135.000',
+    name: 'Empanaditas rancheras',
+    description: 'Con queso y salchicha ranchera',
+    image: 'assets/products/eranchera.jpg',
+    sizes: EMPANADITAS_FRITOS_SIZES,
   },
 
   // ══════════════════════════════════════
@@ -312,6 +272,46 @@ export const PRODUCTS: Product[] = [
     image: 'assets/products/cfrito.jpg',
     price: '$120.000',
   },
+
+  // ══════════════════════════════════════
+  // COMBOS — Fritos
+  // ══════════════════════════════════════
+  {
+    id: 'combo-fritos-60',
+    categoryId: 'combos',
+    subcategoryId: 'fritos',
+    name: 'Combo de 60',
+    description: '30 deditos fritos variados y 30 empanaditas fritas variadas',
+    image: 'assets/products/cfrito.jpg',
+    price: '$58.000',
+  },
+  {
+    id: 'combo-fritos-90',
+    categoryId: 'combos',
+    subcategoryId: 'fritos',
+    name: 'Combo de 90',
+    description: '45 deditos fritos variados y 45 empanaditas fritas variadas',
+    image: 'assets/products/cfrito.jpg',
+    price: '$87.000',
+  },
+  {
+    id: 'combo-fritos-120',
+    categoryId: 'combos',
+    subcategoryId: 'fritos',
+    name: 'Combo de 120',
+    description: '60 deditos fritos variados y 60 empanaditas fritas variadas',
+    image: 'assets/products/cfrito.jpg',
+    price: '$112.000',
+  },
+  {
+    id: 'combo-fritos-150',
+    categoryId: 'combos',
+    subcategoryId: 'fritos',
+    name: 'Combo de 150',
+    description: '75 deditos fritos variados y 75 empanaditas fritas variadas',
+    image: 'assets/products/cfrito.jpg',
+    price: '$135.000',
+  },
 ];
 
 // — Mapeo de categorías —
@@ -324,27 +324,27 @@ export const CATEGORY_NAMES: Record<string, string> = {
 
 export const SUBCATEGORIES_BY_CATEGORY: Record<string, Subcategory[]> = {
   deditos: [
-    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
     {
       id: 'congelados',
       title: 'Congelados',
       subtitle: 'Para preparar en casa',
     },
+    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
   ],
   empanaditas: [
-    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
     {
       id: 'congelados',
       title: 'Congelados',
       subtitle: 'Para preparar en casa',
     },
+    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
   ],
   combos: [
-    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
     {
       id: 'congelados',
       title: 'Congelados',
       subtitle: 'Para preparar en casa',
     },
+    { id: 'fritos', title: 'Fritos', subtitle: 'Listos para consumir' },
   ],
 };
