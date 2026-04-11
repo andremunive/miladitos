@@ -12,7 +12,6 @@ import {
 } from '../store/cart/cart.selectors';
 import { CartItem } from '../store/cart/cart.reducer';
 import { clearCart } from '../store/cart/cart.actions';
-import { PRODUCTS, CATEGORY_NAMES } from '../data/products.data';
 
 @Component({
   selector: 'app-checkout',
@@ -112,7 +111,8 @@ export class CheckoutComponent {
     for (const item of items) {
       lines.push('________________________');
       lines.push(`Producto: ${item.name}`);
-      lines.push(`Detalle: ${this.getCategoryLabel(item.productId)}`);
+      lines.push(`Detalle: ${this.getDetalle(item)}`);
+      lines.push(`Preparación: ${this.getPreparacion(item)}`);
       lines.push(`Cant: ${item.quantity}`);
       lines.push(`Sub. Total: ${this.formatPrice(this.getLineTotal(item))}`);
     }
@@ -130,9 +130,19 @@ export class CheckoutComponent {
     return lines.join('\n');
   }
 
-  private getCategoryLabel(productId: string): string {
-    const product = PRODUCTS.find((p) => p.id === productId);
-    return product ? CATEGORY_NAMES[product.categoryId] : 'N/A';
+  private getDetalle(item: CartItem): string {
+    if (item.productId.endsWith('-grande')) return 'Bandeja grande';
+    if (item.productId.endsWith('-mediana')) return 'Bandeja mediana';
+    return 'N/A';
+  }
+
+  private getPreparacion(item: CartItem): string {
+    if (item.description.includes(' · ')) {
+      return item.description.split(' · ')[0];
+    }
+    if (item.productId.includes('fritos')) return 'Fritos';
+    if (item.productId.includes('congelados')) return 'Congelados';
+    return 'N/A';
   }
 
   private getLineTotal(item: CartItem): number {

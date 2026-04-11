@@ -1,13 +1,45 @@
 <div class="menu">
   <div class="menu__overlay"></div>
 
-  <a routerLink="/" class="menu__back" aria-label="Volver al inicio">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-    </svg>
-  </a>
+  <!-- Loader: sartén con dedito saltando -->
+  <div *ngIf="loading" class="menu__loader">
+    <div class="menu__pan-scene">
+      <!-- Dedito (z-index cambia con animación para entrar en el sartén) -->
+      <div class="menu__food">
+        <svg viewBox="0 0 40 16" fill="none" aria-hidden="true">
+          <rect x="2" y="2" width="36" height="12" rx="6" fill="#fc4c00"/>
+          <rect x="5" y="4" width="10" height="3" rx="1.5" fill="#e04300" opacity="0.5"/>
+          <rect x="18" y="6" width="8" height="2.5" rx="1.25" fill="#e04300" opacity="0.4"/>
+          <path d="M6 9 C10 11, 16 10, 20 9" stroke="#d4a574" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+          <rect x="2" y="2" width="36" height="12" rx="6" fill="none" stroke="#d93c00" stroke-width="0.8" opacity="0.4"/>
+        </svg>
+      </div>
+      <!-- Sartén -->
+      <svg class="menu__pan" viewBox="0 0 220 55" fill="none" aria-hidden="true">
+        <!-- Cuerpo del sartén -->
+        <path d="M15 12 C15 12, 12 48, 65 48 L115 48 C168 48, 165 12, 165 12" fill="#fafafa" stroke="#e0e0e0" stroke-width="2"/>
+        <!-- Borde superior -->
+        <path d="M12 12 L168 12" stroke="#e0e0e0" stroke-width="3" stroke-linecap="round"/>
+        <!-- Mango -->
+        <path d="M166 10 L200 10 C208 10, 210 14, 210 17 C210 20, 208 24, 200 24 L166 22" fill="#fafafa" stroke="#e0e0e0" stroke-width="2"/>
+        <!-- Detalle interior del sartén -->
+        <path d="M30 20 C50 22, 100 24, 150 20" stroke="#e8e8e8" stroke-width="1" opacity="0.6"/>
+      </svg>
+      <!-- Sombra -->
+      <div class="menu__pan-shadow"></div>
+    </div>
+    <p class="menu__loader-text">Cocinando el menú<span class="menu__dots"></span></p>
+  </div>
 
-  <div class="menu__content">
+  <!-- Contenido -->
+  <ng-container *ngIf="!loading">
+    <a routerLink="/" class="menu__back" aria-label="Volver al inicio">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+    </a>
+
+    <div class="menu__content">
     <header class="menu__header">
       <div class="menu__brand">
         <div class="menu__logo-wrap">
@@ -41,5 +73,6 @@
         </svg>
       </a>
     </section>
-  </div>
+    </div>
+  </ng-container>
 </div>
