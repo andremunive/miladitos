@@ -53,15 +53,16 @@
               <h2 class="category__card-title">{{ product.name }}</h2>
               <p class="category__card-description">{{ product.description }}</p>
 
-              <div *ngIf="product.sizes" class="category__size-toggle">
+              <div *ngIf="product.sizes" class="category__size-segmented">
                 <button
                   *ngFor="let size of product.sizes"
                   type="button"
-                  class="category__size-btn"
-                  [class.category__size-btn--active]="getSelectedSizeId(product.id) === size.id"
+                  class="category__size-seg"
+                  [class.category__size-seg--active]="getSelectedSizeId(product.id) === size.id"
                   (click)="selectSize(product.id, size.id)"
                 >
-                  {{ size.label }}
+                  <span class="category__size-seg-label">{{ size.label }}</span>
+                  <span class="category__size-seg-price">{{ size.price }}</span>
                 </button>
               </div>
 
@@ -69,7 +70,7 @@
                 {{ getSelectedSizeDetail(product) }}
               </p>
 
-              <p class="category__card-price">{{ getDisplayPrice(product) }}</p>
+              <p *ngIf="!product.sizes" class="category__card-price">{{ getDisplayPrice(product) }}</p>
             </div>
           </div>
           <div class="category__card-actions">
@@ -89,7 +90,7 @@
                 (click)="addOne(product.id)"
               >+</button>
             </div>
-            <button type="button" class="category__add-btn" (click)="addToCart(product)">Agregar</button>
+            <button type="button" class="category__add-btn" (click)="addToCart(product, $event)">Agregar · {{ getDisplayPrice(product) }}</button>
           </div>
         </article>
       </section>

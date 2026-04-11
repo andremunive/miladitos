@@ -121,7 +121,7 @@ export class CategoryProductsComponent {
     return size?.detail || '';
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: Product, event: MouseEvent): void {
     const quantity = this.getQuantity(product.id);
     let cartId: string;
     let price: string;
@@ -153,5 +153,57 @@ export class CategoryProductsComponent {
     this.cartFab.triggerBump();
     this.toast.show(`${product.name} agregado al carrito`, 'success');
     this.productQuantities[product.id] = 1;
+
+    this.flyToCart(event);
+  }
+
+  private flyToCart(event: MouseEvent): void {
+    const btn = event.currentTarget as HTMLElement;
+    const rect = btn.getBoundingClientRect();
+
+    const startX = rect.left + rect.width / 2 - 10;
+    const startY = rect.top + rect.height / 2 - 10;
+    const endX = window.innerWidth - 44;
+    const endY = window.innerHeight - 70;
+
+    const dot = document.createElement('div');
+    Object.assign(dot.style, {
+      position: 'fixed',
+      width: '20px',
+      height: '20px',
+      borderRadius: '50%',
+      background: '#fc4c00',
+      zIndex: '9999',
+      pointerEvents: 'none',
+      boxShadow: '0 2px 8px rgba(252,76,0,0.5)',
+      left: `${startX}px`,
+      top: `${startY}px`,
+      // X se mueve lineal, Y usa una curva que sube primero
+      transition: 'left 0.6s linear, transform 0.6s ease-in, opacity 0.6s ease'
+    });
+    document.body.appendChild(dot);
+
+    // Animar con keyframes para la parábola vertical
+    const anim = dot.animate([
+      { top: `${startY}px`, offset: 0 },
+      { top: `${startY - 80}px`, offset: 0.35 },
+      { top: `${endY}px`, offset: 1 }
+    ], {
+      duration: 600,
+      easing: 'ease-in',
+      fill: 'forwards'
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        Object.assign(dot.style, {
+          left: `${endX}px`,
+          transform: 'scale(0.3)',
+          opacity: '0.4'
+        });
+      });
+    });
+
+    anim.onfinish = () => dot.remove();
   }
 }
