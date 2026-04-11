@@ -45,10 +45,7 @@ export class CategoryProductsComponent {
     this.subcategories = SUBCATEGORIES_BY_CATEGORY[path] || [];
     this.products = PRODUCTS.filter(p => p.categoryId === path);
 
-    // Expandir la primera subcategoría por defecto
-    if (this.subcategories.length > 0) {
-      this.expandedSubcategories[this.subcategories[0].id] = true;
-    }
+    // Todas las subcategorías inician contraídas por defecto
 
     this.products.forEach(p => {
       this.productQuantities[p.id] = 1;
